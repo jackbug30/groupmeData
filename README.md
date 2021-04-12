@@ -2,7 +2,7 @@
 This program has several functions useful for getting data from GroupMe.
 
 ## To start:
-You'll need an access token from GroupMe to use the api. You can get one by logging in to https://dev.groupme.com/ and clicking 'access token' at the top. Put that (as a string) as the variable accessToken.
+You'll need an access token from GroupMe to use the api. You can get one by logging in to https://dev.groupme.com/ and clicking 'access token' at the top. Put that (as a string) as the variable accessToken. Here's a link to the docs...I've found a few typos and what the exact format of what's returned isn't always what they say, but for the most part they're pretty good. https://dev.groupme.com/docs/v3
 
 ## getGroups()
 Prints an unformatted json object...kind of a hassle to read but it's doable. You can get group names, IDs (needed for getBreakdown), etc.
