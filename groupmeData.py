@@ -13,7 +13,7 @@ def getBreakdown():
             url = baseURL + "/groups/" + groupID + "/messages?token=" + accessToken
         r = requests.get(url)
         data = r.json() #data now in JSON
-        for x in range(20): #iterate through the 100 messages in this block
+        for x in range(20): #iterate through the 20 messages in this block
             try:
                 name = data['response']['messages'][x]['name'] #most recent message ID
             except:
