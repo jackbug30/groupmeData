@@ -5,27 +5,27 @@ accessToken = "[your token here]"
 groupID = "[group id, from getGroups(), here]"
 
 def getBreakdown():
-    users = {}
-    while True: #api will only return small groups of messages so have to do lots
+    users = {} #dictionary to hold user:# of messages
+    while True: #api will only return groups of 20 messages so have to do lots
         try:
-            url = baseURL + "/groups/" + groupID + "/messages?token=" + accessToken + "&before_id=" + lastID
+            url = baseURL + "/groups/" + groupID + "/messages?token=" + accessToken + "&before_id=" + lastID #before_id gives the 20 messages before that id
         except:
-            url = baseURL + "/groups/" + groupID + "/messages?token=" + accessToken
+            url = baseURL + "/groups/" + groupID + "/messages?token=" + accessToken #first time scanning? before_id doesn't exist, omit to get 20 most recent
         r = requests.get(url)
         data = r.json() #data now in JSON
         for x in range(20): #iterate through the 20 messages in this block
             try:
-                name = data['response']['messages'][x]['name'] #most recent message ID
+                name = data['response']['messages'][x]['name'] #pull the name out
             except:
-                break
+                break #if at end of messages, it won't exist. leave while True loop
             try:
-                users[name] += 1
+                users[name] += 1 #increment user message count
             except:
-                users[name] = 1
+                users[name] = 1 #or add their name to the dictionary
         try:
-           lastID = data['response']['messages'][19]['id']
+           lastID = data['response']['messages'][19]['id'] #get last message id to get 20 previous
         except:
-            break
+            break #or already at end of list, leave while True loop
     #print(users)
     #print(len(users))
     usersList = users.keys()
