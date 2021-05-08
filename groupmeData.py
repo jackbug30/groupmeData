@@ -52,7 +52,13 @@ def getGroups(): #much improvement to be made, later
     data = response.json()
     print(data)
 
+def main(): 
+    accessToken = input("Enter your access token")
+    getBreakdown()
+    
 
+if __name__ == "__main__":
+    main()  
 
 #api sends sender_id (not user_id) and sender_typer (user or system)...
 #system id is 'system'
