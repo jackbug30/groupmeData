@@ -1,27 +1,31 @@
 #manages requests and formats data for the visualization and controller
 
 import requests
+import json
 
 
 baseURL = "https://api.groupme.com/v3"
 accessToken = "VqDGJfkyaRcR77rQoUpRRGB9FsTfOAUg7eSW7shP"
-operation = ""
-group_ids = []
-something = ""
 
-def getGroups(): 
+def get_groups(num): 
     url = ""
-    url = baseURL + "/groups?token=" + accessToken 
+    try:
+        url = baseURL + "/groups?token=" + accessToken + "&per_page=" + num
+    except:
+        print("Got you a bad token or a bad group count.")
+        return 
 
     req = requests.get(url)
     data = req.json()["response"]
+    return data
+    #print(json.dumps(data, sort_keys=True, indent=4))
 
-    for i in data:
-        group_ids.append(i["id"])
+  
+    
 
 
 def get_messages(group_id):
-    url = baseURL + "/groups/" + group_id + "/messages?token=" + accessToken 
+    url = baseURL + "/groups/" + group_id + "/messages?token=" + accessToken
     data = requests.get(url).json()["response"]
 
     #message requesting has a limit, this checks for the limit and makes multiple pulls if needed. 
